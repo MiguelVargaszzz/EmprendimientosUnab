@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "694477256207",
+    "project_id": "emprendimientosunab-d1bf1",
+    "storage_bucket": "emprendimientosunab-d1bf1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694477256207:android:bf7d3765046d6f2970157a",
+        "android_client_info": {
+          "package_name": "com.miguelvargas_wilsongomez.emprendimientosunab"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACOlWOgrRWk1fyiqsfd2nDfyNz_bamz7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
