@@ -268,8 +268,8 @@ fun RegisterScreen(onClickBack :() -> Unit = {}, onSuccesfulRegister:() -> Unit 
                             val isValidConfirmPassword = validateConfirmPassword(inputPassword, inputConfirmPassword).first
 
                             nameError = validateName(inputName).second
-                            emailError = validateEmail(inputName).second
-                            passwordError = validatePassword(inputName).second
+                            emailError = validateEmail(inputEmail).second
+                            passwordError = validatePassword(inputPassword).second
                             confirmPasswordError = validateConfirmPassword(inputPassword, inputConfirmPassword).second
 
                             if (isValidName && isValidEmail && isValidPassword && isValidConfirmPassword){
@@ -278,11 +278,15 @@ fun RegisterScreen(onClickBack :() -> Unit = {}, onSuccesfulRegister:() -> Unit 
                                             if (task.isSuccessful){
                                                 onSuccesfulRegister()
                                             }else{
-                                                registerError = when(task.isSuccessful){
-                                                    is FirebaseAuthInvalidCredentialsException -> "Correo invalido"
-                                                    is FirebaseAuthUserCollisionException -> "Correo ya registrado"
-                                                    else -> "Error al registrarse"
+                                                task.exception?.let { exception ->  // Manejo de los errores,
+                                                    registerError = when (exception) {
+                                                        is FirebaseAuthInvalidCredentialsException -> "Correo inválido"
+                                                        is FirebaseAuthUserCollisionException -> "Correo ya registrado"
+                                                        else -> "Error al registrarse: ${exception.localizedMessage}"
+                                                    }
                                                 }
+
+
                                             }
                                         }
                             }else{

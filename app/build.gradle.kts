@@ -70,5 +70,10 @@ dependencies {
 
 
     // auth
+    implementation(libs.firebase.auth.ktx)
+
+    // Storage
+
+    implementation(libs.firebase.storage.ktx)
 
 }

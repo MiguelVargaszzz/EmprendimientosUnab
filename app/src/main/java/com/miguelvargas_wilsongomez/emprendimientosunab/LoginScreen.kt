@@ -56,7 +56,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.auth
 
 @Composable
-fun LoginScreen(onClickRegister :()-> Unit = {}, onSuccessfulLogin : () -> Unit = {}) {
+fun LoginScreen(onClickRegister :()-> Unit = {}, onSuccessfulLogin : () -> Unit = {}, onForgotPassword: () -> Unit = {} ) {
     Scaffold (containerColor = Color(0xFF8600DD) ) { paddingValues ->
 
         val auth = Firebase.auth
@@ -206,8 +206,6 @@ fun LoginScreen(onClickRegister :()-> Unit = {}, onSuccessfulLogin : () -> Unit 
                                             }
                                         }
                                     }
-                            } else {
-
                             }
 
                         },
@@ -219,6 +217,17 @@ fun LoginScreen(onClickRegister :()-> Unit = {}, onSuccessfulLogin : () -> Unit 
 
                         ) {
                             Text("Iniciar Sesión", textAlign = TextAlign.Center)
+                    }
+
+                    TextButton(
+                        onClick = onForgotPassword,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = "¿Olvidaste tu contraseña?",
+                            color = Color(0xFFFF9900),
+                            modifier = Modifier.wrapContentWidth(Alignment.CenterHorizontally)
+                        )
                     }
 
                     TextButton(

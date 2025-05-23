@@ -36,24 +36,57 @@ fun NavigationApp (){
                 myNavController.navigate("home"){
                     popUpTo("login"){inclusive = true}
                 }
-            })
+            },
+                onForgotPassword = {
+                    myNavController.navigate("forgotPassword")
+                }
+                )
         }
         composable("register") {
             RegisterScreen(onClickBack = {
                 myNavController.popBackStack()
             }, onSuccesfulRegister = {
                 myNavController.navigate("home"){
-                    popUpTo(0)
+                    popUpTo("register") { inclusive = true }
                 }
 
             }
             )
         }
         composable("forgotPassword") {
-            ForgotPasswordScreen()
+            ForgotPasswordScreen(
+                onClickBack = {
+                    myNavController.popBackStack()
+                }
+            )
         }
         composable("home") {
-            HomeScreen()
+            HomeScreen(
+                onClickLogout = {
+                    Firebase.auth.signOut()
+                    myNavController.navigate("login"){
+                        popUpTo("home") {inclusive = true }
+                    }
+                }
+            )
+        }
+        composable ("perfil") {
+            val user = Firebase.auth.currentUser
+            val name = user?.displayName ?: "Nombre no disponible"
+            val email = user?.email ?: "Correo no disponible"
+            val photoUrl = user?.photoUrl?.toString()
+
+            ProfileScreen(
+                userName = name,
+                userEmail = email,
+                userPhotoUrl = photoUrl,
+                onLogout = {
+                    Firebase.auth.signOut()
+                    myNavController.navigate("login") {
+                        popUpTo("perfil") { inclusive = true }
+                    }
+                }
+            )
         }
     }
 
